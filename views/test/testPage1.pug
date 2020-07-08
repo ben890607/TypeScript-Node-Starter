@@ -1,0 +1,36 @@
+extends ../layout
+
+block content
+  .page-header
+    h3 Test Page
+    hr
+    h4 #{user.email}
+    h4 #{user.profile.name}
+    h4 #{currentUser.userEmail}
+    h4 #{currentUser.userName}
+    table.ui.celled.table.center.aligned
+        thead
+            tr
+            th Product Id
+            th Product Name
+        tbody        
+            tr
+            td #{products.productId}
+            td #{products.productName}
+        tfoot
+          tr
+            th(colspan='2')    
+
+    table.ui.celled.table.center.aligned
+        thead
+            tr
+            th Product Id
+            th Product Color
+        tbody
+            each item in productDetails
+                tr
+                td #{item.productId}
+                td #{item.color}
+        tfoot
+          tr
+            th(colspan='2')

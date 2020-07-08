@@ -1,0 +1,26 @@
+extends ../layout
+
+block content
+  .page-header
+    h3 Test Page2
+    hr
+
+  form.form-horizontal(action='/account/profile', method='POST')
+    input(type='hidden', name='_csrf', value=_csrf)    
+    .form-group.row.justify-content-md-center
+      label.col-sm-3.col-form-label.text-right.font-weight-bold(for='productId') Product Id
+      .col-sm-7
+        input.form-control(type='productId', name='productId', id='productId', value=products.productId)
+    .form-group.row.justify-content-md-center
+      label.col-sm-3.col-form-label.text-right.font-weight-bold(for='name') Product Name
+      .col-sm-7
+        input.form-control(type='text', name='productName', id='productName', value=products.productName)
+    .form-group.row.justify-content-md-center
+      label.col-sm-3.col-form-label.text-right.font-weight-bold(for='name') Name
+      .col-sm-7
+        input.form-control(type='text', name='Name', id='Name', placeholder="productName")
+    .form-group.row.justify-content-md-center
+      .col-sm-4
+        button.btn.btn.btn-primary(type='submit')
+          i.fa.fa-pencil
+          | Update Product        
