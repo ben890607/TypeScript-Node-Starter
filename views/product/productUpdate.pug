@@ -1,0 +1,24 @@
+extends ../layout
+
+block content
+  .page-header
+    h3 Product - Add
+    hr
+
+  form.form-horizontal(action='productUpdate', method='POST')
+    input(type='hidden', name='_csrf', value=_csrf)    
+    .form-group.row.justify-content-md-center
+      label.col-sm-3.col-form-label.text-right.font-weight-bold(for='productId') 產品代碼
+      .col-sm-7
+        input.form-control(type='text', name='productId', id='productId', placeholder="產品代碼",
+        value=product.productId)
+    .form-group.row.justify-content-md-center
+      label.col-sm-3.col-form-label.text-right.font-weight-bold(for='name') 產品名稱
+      .col-sm-7
+        input.form-control(type='text', name='productName', id='productName', placeholder="產品名稱", 
+        value=product.productName)
+    .form-group.row.justify-content-md-center
+      .col-sm-4
+        button.btn.btn.btn-primary(type='submit')
+          i.fa.fa-pencil
+          | Update Product  

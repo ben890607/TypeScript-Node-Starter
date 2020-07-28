@@ -5,6 +5,39 @@
     "version": "0.2.0",
     "configurations": [
         {
+            "name": "TestLaunch",
+            "type": "pwa-node",
+            "request": "launch",
+            "runtimeArgs": [
+                "-r",
+                "ts-node/register"
+            ],
+            "args": [
+                "${file}"
+            ],
+            "env": {
+                "DEBUG": "b-dev*"
+            },
+            //"envFile": "${workspaceFolder}/.env",
+            "outputCapture": "std",
+            "console": "internalConsole",
+            "internalConsoleOptions": "openOnSessionStart"
+        },
+        {
+            "name": "Watch Server",
+            "request": "launch",
+            "type": "node",
+            "program": "${workspaceFolder}/src/server",
+            "restart": true,
+            "runtimeExecutable": "ts-node-dev",
+            "skipFiles": [
+                "<node_internals>/**"
+            ],
+            //"env": { "DEBUG": "wdev*" },
+            "console": "integratedTerminal",
+            "internalConsoleOptions": "neverOpen"
+        },
+        {
             "type": "node",
             "request": "attach",
             "name": "Attach by Process ID",

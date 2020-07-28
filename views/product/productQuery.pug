@@ -1,0 +1,44 @@
+extends ../layout
+
+block content
+  .page-header
+    h3 Product Query
+    hr
+
+  a.btn.btn-default.btn-xs(href='/product/productAdd') 新增產品
+  form.form-horizontal(action='/product/productQuery', method='POST')
+    input(type='hidden', name='_csrf', value=_csrf)    
+    .form-group.row.justify-content-md-center
+      label.col-sm-3.col-form-label.text-right.font-weight-bold(for='productId') 產品代碼
+      .col-sm-7
+        input.form-control(type='text', name='productId', id='productId', placeholder="產品代碼",
+        value=conditions.productId)
+    .form-group.row.justify-content-md-center
+      label.col-sm-3.col-form-label.text-right.font-weight-bold(for='name') 產品名稱
+      .col-sm-7
+        input.form-control(type='text', name='productName', id='productName', placeholder="產品名稱", 
+        value=conditions.productName)  
+    .form-group.row.justify-content-md-center
+      .col-sm-4
+        button.btn.btn.btn-primary(type='submit')
+          i.fa.fa-pencil
+          | Query Product  
+
+  if products
+    table.ui.celled.table.center.aligned
+      thead
+          tr
+          th 
+          th Product Id
+          th Product Name
+      tbody
+          each item in products
+              tr
+              td                
+                a.btn.btn-default.btn-xs(href='/product/ProductUpdate/') 明細
+              td #{item.productId}
+              td #{item.productName}
+      tfoot
+        tr
+          th(colspan='3')
+    

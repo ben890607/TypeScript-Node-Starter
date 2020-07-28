@@ -8,6 +8,7 @@ block content
     h4 #{user.profile.name}
     h4 #{currentUser.userEmail}
     h4 #{currentUser.userName}
+
     table.ui.celled.table.center.aligned
         thead
             tr
@@ -24,13 +25,16 @@ block content
     table.ui.celled.table.center.aligned
         thead
             tr
+            th 
             th Product Id
             th Product Color
         tbody
             each item in productDetails
                 tr
+                td 
+                  a.btn.btn-default.btn-xs(href='/lms.console/Members/User/Detail/111') 明細
                 td #{item.productId}
                 td #{item.color}
         tfoot
           tr
-            th(colspan='2')
+            th(colspan='3')

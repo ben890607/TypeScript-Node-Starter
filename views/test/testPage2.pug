@@ -2,25 +2,33 @@ extends ../layout
 
 block content
   .page-header
-    h3 Test Page2
+    h3 產品
     hr
 
   form.form-horizontal(action='/account/profile', method='POST')
     input(type='hidden', name='_csrf', value=_csrf)    
     .form-group.row.justify-content-md-center
-      label.col-sm-3.col-form-label.text-right.font-weight-bold(for='productId') Product Id
+      label.col-sm-3.col-form-label.text-right.font-weight-bold(for='productId') 產品代碼
       .col-sm-7
         input.form-control(type='productId', name='productId', id='productId', value=products.productId)
     .form-group.row.justify-content-md-center
-      label.col-sm-3.col-form-label.text-right.font-weight-bold(for='name') Product Name
+      label.col-sm-3.col-form-label.text-right.font-weight-bold(for='name') 產品名稱
       .col-sm-7
-        input.form-control(type='text', name='productName', id='productName', value=products.productName)
-    .form-group.row.justify-content-md-center
-      label.col-sm-3.col-form-label.text-right.font-weight-bold(for='name') Name
-      .col-sm-7
-        input.form-control(type='text', name='Name', id='Name', placeholder="productName")
+        input.form-control(type='text', name='productName', id='productName', placeholder="產品名稱", value=products.productName)
     .form-group.row.justify-content-md-center
       .col-sm-4
         button.btn.btn.btn-primary(type='submit')
           i.fa.fa-pencil
           | Update Product        
+
+  .page-header
+    h3 產品規格
+    hr
+
+    .form-group.row.justify-content-md-center
+        label.col-sm-3.col-form-label.text-right.font-weight-bold(for='color')  屬性
+        label.col-sm-7.col-form-label.text-left.font-weight-bold(for='color')  屬性值
+    each item in productDetails
+      .form-group.row.justify-content-md-center
+        label.col-sm-3.col-form-label.text-right.font-weight-bold(for='color')  顏色
+        label.col-sm-7.col-form-label.text-left.font-weight-bold(for='color')  #{item.color}

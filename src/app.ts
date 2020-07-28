@@ -19,6 +19,7 @@ import * as userController from "./controllers/user";
 import * as apiController from "./controllers/api";
 import * as contactController from "./controllers/contact";
 import * as testController from "./controllers/test";
+import * as productController from "./controllers/product";
 
 
 // API keys and Passport configuration
@@ -104,11 +105,24 @@ app.post("/account/delete", passportConfig.isAuthenticated, userController.postD
 app.get("/account/unlink/:provider", passportConfig.isAuthenticated, userController.getOauthUnlink);
 app.get("/test/TestPage1", passportConfig.isAuthenticated, testController.getTestPage1);
 app.get("/test/TestPage2", passportConfig.isAuthenticated, testController.getTestPage2);
+app.get("/test/TestPage3", passportConfig.isAuthenticated, testController.getTestPage3);
+app.get("/product/productQuery/:clearQuery", passportConfig.isAuthenticated, productController.getProduct);
+app.post("/product/productQuery", passportConfig.isAuthenticated, productController.postProductQuery);
+app.get("/product/productAdd", passportConfig.isAuthenticated, productController.getProductAdd);
+app.post("/product/productAdd", passportConfig.isAuthenticated, productController.postProductAdd);
+app.get("/product/productUpdate", passportConfig.isAuthenticated, productController.getProductUpdate);
+app.post("/product/productUpdate", passportConfig.isAuthenticated, productController.postProductUpdate);
 
 /**
  * API examples routes.
  */
 app.get("/api", apiController.getApi);
+app.get("/api/Product", apiController.getProduct);
+app.post("/api/Product/Init", apiController.initProduct);
+app.post("/api/Product", apiController.postProduct);
+app.put("/api/Product/:productId", apiController.putProduct);
+
+
 app.get("/api/facebook", passportConfig.isAuthenticated, passportConfig.isAuthorized, apiController.getFacebook);
 
 /**
