@@ -18,6 +18,11 @@ block content
         input.form-control(type='text', name='productName', id='productName', placeholder="產品名稱", 
         value=product.productName)
     .form-group.row.justify-content-md-center
+      label.col-sm-3.col-form-label.text-right.font-weight-bold(for='name') 價格
+      .col-sm-7
+        input.form-control(type='text', name='price', id='price', placeholder="價格", 
+        value=product.price)
+    .form-group.row.justify-content-md-center
       .col-sm-4
         button.btn.btn.btn-primary(type='submit')
           i.fa.fa-pencil

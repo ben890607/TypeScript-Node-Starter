@@ -110,7 +110,7 @@ app.get("/product/productQuery/:clearQuery", passportConfig.isAuthenticated, pro
 app.post("/product/productQuery", passportConfig.isAuthenticated, productController.postProductQuery);
 app.get("/product/productAdd", passportConfig.isAuthenticated, productController.getProductAdd);
 app.post("/product/productAdd", passportConfig.isAuthenticated, productController.postProductAdd);
-app.get("/product/productUpdate", passportConfig.isAuthenticated, productController.getProductUpdate);
+app.get("/product/productUpdate/:productId", passportConfig.isAuthenticated, productController.getProductUpdate);
 app.post("/product/productUpdate", passportConfig.isAuthenticated, productController.postProductUpdate);
 
 /**

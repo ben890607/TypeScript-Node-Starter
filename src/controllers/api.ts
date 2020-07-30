@@ -62,9 +62,9 @@ export const getProduct = (req: Request, res: Response) => {
         condition.productId = req.query.productId as string;  
     //尋找X開頭資料，並不分大小寫
     if (!!req.query.productName) {
-        let productname = "^" + (req.query.productName);
-        //condition.productName = { $regex: productname, $options: "<options>" };        
-        condition.productName = { $regex: productname, $options: "i" };        
+        let productName = "^" + (req.query.productName);
+        //condition.productName = ;        
+        condition.productName = { $regex: productName, $options: "i" };        
     }
     //查詢價格大於N
     if (!!req.query.price)

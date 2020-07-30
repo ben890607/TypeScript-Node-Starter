@@ -34,8 +34,9 @@ block content
       tbody
           each item in products
               tr
-              td                
-                a.btn.btn-default.btn-xs(href='/product/ProductUpdate/') 明細
+              td              
+                //a(href='/product/ProductUpdate/' + item.productId, class='btn btn-default btn-xs') 明細                                  
+                a.btn.btn-default.btn-xs(href='/product/ProductUpdate/' + item.productId) 明細
               td #{item.productId}
               td #{item.productName}
       tfoot

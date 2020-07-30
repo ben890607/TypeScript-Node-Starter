@@ -8,6 +8,3 @@ coverage/*
 /src/public/
 # custom definition files
 /src/types/
-# log
-/log
-*.log

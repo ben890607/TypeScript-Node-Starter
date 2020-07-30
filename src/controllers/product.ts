@@ -3,7 +3,7 @@ import "../config/passport";
 import { WriteError } from "mongodb";
 import { check, sanitize, validationResult } from "express-validator";
 
-import { Product } from "../models/Product";
+import { Product, ProductModel, ProductDocument } from "../models/Product";
 import { UserDocument } from "../models/User";
 import { inflate } from "zlib";
 
@@ -39,13 +39,13 @@ export const postProductQuery = (req: Request, res: Response, next: NextFunction
     if (req.body.productName !== "")
         condition.productName = req.body.productName;
     
-    Product.find(condition, (err, existingProduct) => {
-    //Product.find({$or: [{ productName: req.body.productName }, { productId: req.body.productId}]}, (err, existingProduct) => {
+    Product.find(condition, (err, result) => {
+    //Product.find({$or: [{ productName: req.body.productName }, { productId: req.body.productId}]}, (err, result) => {
         if (err) { return next(err); }
-        if (existingProduct) {
+        if (result) {
             res.render("product/productQuery", {
                 title: "Product Query",
-                products: existingProduct,
+                products: result,
                 conditions: condition
             });
             return next();
@@ -71,10 +71,10 @@ export const postProductAdd = (req: Request, res: Response, next: NextFunction) 
         price: req.body.price
     });
 
-    Product.findOne({ productId: req.body.productId }, (err, existingProduct) => {
+    Product.findOne({ productId: req.body.productId }, (err, result: ProductDocument) => {
         if (err) { return next(err); }
-        if (existingProduct) {
-            req.flash("errors", { msg: "Product " + product.productId + " already exists." });
+        if (result) {
+            req.flash("errors", { msg: "Product " + result.productId + " already exists." });
             //return res.redirect("productAdd");
             
             res.render("product/productAdd", {
@@ -92,14 +92,14 @@ export const postProductAdd = (req: Request, res: Response, next: NextFunction) 
 
 export const getProductUpdate = (req: Request, res: Response) => {
 
-    Product.find({ productId: req.body.ProductId }, (err, existingProduct) => {
+    Product.findOne({ productId: req.params.productId }, (err, result: ProductDocument) => {
         if (err) { 
-            req.flash("errors", { msg: "Product not exists." });
+            return res.redirect("productQuery");
         }
-        if (existingProduct) {
+        if (result) {           
             res.render("product/productUpdate", {
                 title: "Product Update",
-                products: existingProduct
+                product: result
             });            
         }
     });
@@ -114,9 +114,9 @@ export const postProductUpdate = (req: Request, res: Response, next: NextFunctio
         price: req.body.price
     });
 
-    Product.findOne({ productId: req.body.productId }, (err, existingProduct) => {
+    Product.findOne({ productId: req.body.productId }, (err, result) => {
         if (err) { return next(err); }
-        if (existingProduct) {
+        if (result) {
             req.flash("errors", { msg: "Product " + product.productId + " already exists." });
             //return res.redirect("productAdd");
             
