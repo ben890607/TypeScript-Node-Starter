@@ -81,7 +81,7 @@ export const getProduct = (req: Request, res: Response) => {
         }
         if (entity) {
             const resModel: ProductModel[] = entity;            
-            return res.send(resModel);
+            return res.send(resModel);            
         }
     });    
     //}).where("price").gte(+req.query.price);    

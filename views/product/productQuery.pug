@@ -4,8 +4,7 @@ block content
   .page-header
     h3 Product Query
     hr
-
-  a.btn.btn-default.btn-xs(href='/product/productAdd') 新增產品
+  
   form.form-horizontal(action='/product/productQuery', method='POST')
     input(type='hidden', name='_csrf', value=_csrf)    
     .form-group.row.justify-content-md-center
@@ -20,7 +19,9 @@ block content
         value=conditions.productName)  
     .form-group.row.justify-content-md-center
       .col-sm-4
-        button.btn.btn.btn-primary(type='submit')
+        a.btn.btn-primary(href='/product/productAdd') 新增產品
+        nbsp
+        button.btn.btn-primary(type='submit')
           i.fa.fa-pencil
           | Query Product  
 
@@ -39,6 +40,7 @@ block content
                 a.btn.btn-default.btn-xs(href='/product/ProductUpdate/' + item.productId) 明細
               td #{item.productId}
               td #{item.productName}
+              td #{item.price}
       tfoot
         tr
           th(colspan='3')

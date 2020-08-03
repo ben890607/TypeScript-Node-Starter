@@ -2,10 +2,12 @@ extends ../layout
 
 block content
   .page-header
-    h3 Product - Update
-    hr
+  h3 Product - Update
+  hr
 
-  form.form-horizontal(action='productUpdate', method='POST')
+  a.btn.btn-default.btn-xs(href='/product/ProductQuery?clearQuery=False') 上一頁
+  hr
+  form.form-horizontal(action='/product/productUpdate/' + product.productId, method='POST')
     input(type='hidden', name='_csrf', value=_csrf)    
     .form-group.row.justify-content-md-center
       label.col-sm-3.col-form-label.text-right.font-weight-bold(for='productId') 產品代碼
