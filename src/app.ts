@@ -11,20 +11,9 @@ import passport from "passport";
 import bluebird from "bluebird";
 import { MONGODB_URI, SESSION_SECRET } from "./util/secrets";
 
+import * as userRoute from "./config/userRoute";
+
 const MongoStore = mongo(session);
-
-// Controllers (route handlers)
-import * as homeController from "./controllers/home";
-import * as userController from "./controllers/user";
-import * as apiController from "./controllers/api";
-import * as contactController from "./controllers/contact";
-import * as testController from "./controllers/test";
-import * as productController from "./controllers/product";
-
-
-// API keys and Passport configuration
-import * as passportConfig from "./config/passport";
-
 // Create Express server
 const app = express();
 
@@ -80,50 +69,11 @@ app.use((req, res, next) => {
 });
 
 app.use(
-    express.static(path.join(__dirname, "public"), { maxAge: 31557600000 })
+    express.static(path.join(__dirname, "public"), { maxAge: 31557600000 })    
 );
 
-/**
- * Primary app routes.
- */
-app.get("/", homeController.index);
-app.get("/login", userController.getLogin);
-app.post("/login", userController.postLogin);
-app.get("/logout", userController.logout);
-app.get("/forgot", userController.getForgot);
-app.post("/forgot", userController.postForgot);
-app.get("/reset/:token", userController.getReset);
-app.post("/reset/:token", userController.postReset);
-app.get("/signup", userController.getSignup);
-app.post("/signup", userController.postSignup);
-app.get("/contact", contactController.getContact);
-app.post("/contact", contactController.postContact);
-app.get("/account", passportConfig.isAuthenticated, userController.getAccount);
-app.post("/account/profile", passportConfig.isAuthenticated, userController.postUpdateProfile);
-app.post("/account/password", passportConfig.isAuthenticated, userController.postUpdatePassword);
-app.post("/account/delete", passportConfig.isAuthenticated, userController.postDeleteAccount);
-app.get("/account/unlink/:provider", passportConfig.isAuthenticated, userController.getOauthUnlink);
-app.get("/test/TestPage1", passportConfig.isAuthenticated, testController.getTestPage1);
-app.get("/test/TestPage2", passportConfig.isAuthenticated, testController.getTestPage2);
-app.get("/test/TestPage3", passportConfig.isAuthenticated, testController.getTestPage3);
-app.get("/product/productQuery", passportConfig.isAuthenticated, productController.getProduct);
-app.post("/product/productQuery", passportConfig.isAuthenticated, productController.postProductQuery);
-app.get("/product/productAdd", passportConfig.isAuthenticated, productController.getProductAdd);
-app.post("/product/productAdd", passportConfig.isAuthenticated, productController.postProductAdd);
-app.get("/product/productUpdate/:productId", passportConfig.isAuthenticated, productController.getProductUpdate);
-app.post("/product/productUpdate/:productId", passportConfig.isAuthenticated, productController.postProductUpdate);
-
-/**
- * API examples routes.
- */
-app.get("/api", apiController.getApi);
-app.get("/api/Product", apiController.getProduct);
-app.post("/api/Product/Init", apiController.initProduct);
-app.post("/api/Product", apiController.postProduct);
-app.put("/api/Product/:productId", apiController.putProduct);
-
-
-app.get("/api/facebook", passportConfig.isAuthenticated, passportConfig.isAuthorized, apiController.getFacebook);
+//routes setting
+userRoute.setRouter(app);
 
 /**
  * OAuth authentication routes. (Sign in)

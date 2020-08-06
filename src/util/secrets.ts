@@ -28,3 +28,5 @@ if (!MONGODB_URI) {
     }
     process.exit(1);
 }
+
+//export const BASE_PATH = process.env["BASE_PATH"];

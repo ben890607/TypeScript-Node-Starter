@@ -5,6 +5,17 @@ block content
     h3 Product Query
     hr
   
+  - let testVar = "Test";
+  - testVar = testVar + "123" + "456";  
+    h3 #{testVar.toUpperCase()}
+    h3= testVar
+
+  ul    
+    - let list = ["Uno", "Dos", "Tres", "Cuatro", "Cinco", "Seis"];
+    - list.push("ABC");
+      each item in list
+        li= item
+
   form.form-horizontal(action='/product/productQuery', method='POST')
     input(type='hidden', name='_csrf', value=_csrf)    
     .form-group.row.justify-content-md-center
@@ -20,7 +31,7 @@ block content
     .form-group.row.justify-content-md-center
       .col-sm-4
         a.btn.btn-primary(href='/product/productAdd') 新增產品
-        nbsp
+        span &nbsp
         button.btn.btn-primary(type='submit')
           i.fa.fa-pencil
           | Query Product  

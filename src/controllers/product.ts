@@ -16,8 +16,7 @@ interface Condition {
 export const getProduct = (req: Request, res: Response) => {
 	const clearQuery = req.query.clearQuery;
 	let condition: Condition = {};
-	if (clearQuery == "True") {		
-
+	if (clearQuery == "True") {
 		res.render("product/productQuery", {
 			title: "Product",
 			conditions: condition
